@@ -30,6 +30,6 @@ func checkServer() {
 	if resp.StatusCode == 200 {
 		fmt.Println("server is running")
 	} else {
-		panic(fmt.Sprintln("server is not running as spected", resp.StatusCode))
+		panic(fmt.Sprintln("server is not running as spected: http status code", resp.StatusCode))
 	}
 }
