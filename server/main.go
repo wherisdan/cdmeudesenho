@@ -13,7 +13,6 @@ func main() {
 	r := gin.Default()
 
 	r.LoadHTMLGlob("./dist/index.html")
-	// r.StaticFile("favicon.ico", "./dist")
 	r.Static("/assets", "./dist/assets")
 
 	r.GET("/", func(c *gin.Context) {
