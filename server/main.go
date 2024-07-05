@@ -8,8 +8,6 @@ import (
 )
 
 func main() {
-	fmt.Println("iniciando servidor")
-
 	r := gin.Default()
 
 	r.LoadHTMLGlob("./dist/index.html")
@@ -19,5 +17,19 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", nil)
 	})
 
-	r.Run(":8080")
+	go checkServer()
+
+	r.Run(":80")
+}
+
+func checkServer() {
+	resp, err := http.Get("http://localhost/")
+	if err!=nil {
+		panic(err)
+	}
+	if resp.StatusCode == 200 {
+		fmt.Println("server is running")
+	} else {
+		panic(fmt.Sprintln("server is not running as spected", resp.StatusCode))
+	}
 }
