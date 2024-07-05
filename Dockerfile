@@ -1,11 +1,23 @@
-FROM golang:1.22.5-alpine
+FROM node:alpine AS build-stage
 
-WORKDIR /src
+WORKDIR /
+COPY ./frontend/package*.json .
 
-COPY . .
+RUN npm install
 
-WORKDIR "/src/server app"
+COPY ./frontend .
 
-RUN go build -o ./build/server
+RUN npm run build
 
-CMD [ "./build/server" ]
+FROM golang:alpine
+
+WORKDIR /
+COPY server .
+
+COPY --from=build-stage /dist .
+
+RUN go build -o /build/server
+
+CMD [ "/build/server" ]
+
+EXPOSE 8080
