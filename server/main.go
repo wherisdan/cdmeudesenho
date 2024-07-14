@@ -26,7 +26,7 @@ func main() {
 func checkServer() {
 	resp, err := http.Get("http://localhost/")
 	if err!=nil {
-		panic(err)
+		fmt.Println("there was a request error:", err)
 	}
 	if resp.StatusCode == 200 {
 		fmt.Println("server is running")
