@@ -9,9 +9,10 @@ import (
 
 func main() {
 	r := gin.Default()
-
-	r.LoadHTMLGlob("./dist/index.html")
+	
+	r.StaticFile("/favicon.ico", "./dist/favicon.ico")
 	r.Static("/assets", "./dist/assets")
+	r.LoadHTMLGlob("./dist/*.html")
 
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)
