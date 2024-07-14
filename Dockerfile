@@ -14,8 +14,9 @@ FROM golang:alpine
 WORKDIR /
 COPY server .
 
-COPY --from=build-stage /dist .
+COPY --from=build-stage /dist ./dist
 
+RUN go get
 RUN go build -o /build/server
 
 CMD [ "/build/server" ]
