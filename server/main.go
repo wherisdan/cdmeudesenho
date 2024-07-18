@@ -7,7 +7,6 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -55,7 +54,6 @@ func main() {
 		proxy := httputil.NewSingleHostReverseProxy(target)
 
 		r.GET("/*static", func(c *gin.Context) {
-			fmt.Println("proxying request to", c.Request.URL)
 			proxy.ServeHTTP(c.Writer, c.Request)
 		})
 
@@ -66,17 +64,4 @@ func main() {
 	}
 
 	r.Run(fmt.Sprintf(":%d", port))
-}
-
-func checkServer() {
-	time.Sleep(time.Millisecond * 80)
-	resp, err := http.Get(fmt.Sprintf("http://%s", host))
-	if err != nil {
-		fmt.Println("there was a request error:", err)
-	}
-	if resp.StatusCode == 200 {
-		fmt.Printf("server is running in http://%s", host)
-	} else {
-		panic(fmt.Sprintln("server is not running as spected: http status code", resp.StatusCode))
-	}
 }
