@@ -1,13 +1,21 @@
 <script setup lang="ts">
-function comprar() {
-  console.log("o cliente quer comprar")
-}
+import Navbar from "./components/navbar/Navbar.vue"
 </script>
 
 <template>
-  <h1>Bem-vindo ao cadê meu desenho</h1>
-  <h2>Aqui, a imaginação não tem limites!</h2>
-  <button @click="comprar">comprar agora</button>
+  <Navbar />
+  <div style="height: 70px;"></div>
 </template>
 
-<style></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: arial;
+  height: 200vh;
+  color: black;
+}
+</style>
