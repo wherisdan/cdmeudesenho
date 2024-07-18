@@ -13,11 +13,7 @@ import (
 
 const port = 80
 
-var host string
-
 func main() {
-	host = fmt.Sprintf("localhost:%d", port)
-
 	r := gin.Default()
 
 	buildMode := os.Getenv("BUILD_MODE")
