@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -30,18 +29,6 @@ func main() {
 		gin.SetMode(gin.ReleaseMode)
 
 	} else if buildMode == "development" {
-		resp, err := http.Get("http://host.docker.internal:5173/")
-		if err != nil {
-			panic(fmt.Sprintf("vue js server req error: %s", err))
-		}
-
-		defer resp.Body.Close()
-		body, err := io.ReadAll(resp.Body)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("vue js server response", string(body))
-
 		target, err := url.Parse("http://host.docker.internal:5173/")
 		if err != nil {
 			panic(err)
